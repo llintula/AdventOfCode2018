@@ -1,0 +1,34 @@
+def find_first_duplicate(list):
+    
+    #initalize values
+    frequency = 0
+    my_set = {frequency}
+    solved = False
+    
+    #While-loop if we need to loop through the input multiple times
+    while solved == False:
+       
+        for l in list:
+            
+            #loop the list adding the visited frequencies to a set
+            frequency += l
+            
+            old = len(my_set)
+            my_set.add(frequency)
+            new = len(my_set)
+            
+            #Continue looping if the set grows in size                    
+            if new > old:
+                continue
+            #If the add failed, we've found the duplicate
+            else:
+                solved = True
+                print("First duplicate: ", frequency)
+                break
+            
+
+txt = open('input.txt')
+lines = txt.read().split('\n')
+lines = list(map(int, lines))
+
+find_first_duplicate(lines)     
