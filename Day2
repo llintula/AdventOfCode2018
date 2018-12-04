@@ -1,0 +1,51 @@
+# DAY 2 PART 1
+
+from collections import Counter
+
+txt = open(r'C:\Users\llintula\Documents\AdventOfCode2018\DayTwoInput.txt')
+lines = txt.read().split('\n')
+txt.close()
+ 
+def checksum(list):
+    twos = 0
+    threes = 0
+    
+    #Use Counter to get the letter counts in a dictionary and .values to find out if any appear twice or thrice
+    for i in list:
+        c = Counter(i)
+        
+        if 3 in c.values():
+            threes += 1   
+    
+        if 2 in c.values():
+            twos +=1
+            
+    checksum = twos * threes
+    
+    print(checksum)
+
+
+checksum(lines)
+
+# DAY 2 PART 2
+
+from difflib import SequenceMatcher
+
+
+#Calculate the number of similar letters by multiplying the similarity ratio with the word length and subtract that from the total length
+#Save the combination where the difference is exactly one letter
+for i in lines:
+    for j in lines:    
+        if len(i)-(SequenceMatcher(None, i, j).ratio()*len(i)) == 1:
+            string1, string2 = i, j
+        else:
+            pass
+
+result = ''
+
+#loop over the strings two get the letters which appear in both. Probably not the best way to solve this.
+for letter in string1:
+    if letter in string2:
+        result += letter
+
+print(result)
